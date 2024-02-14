@@ -1,0 +1,37 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: "configserver"
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/imrohit68/sports-app-config.git"
+          force-pull: true
+          clone-on-start: true
+          default-label: main
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveliness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+logging:
+  level:
+    com:
+      sprotsapppoc:
+        configserver: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"

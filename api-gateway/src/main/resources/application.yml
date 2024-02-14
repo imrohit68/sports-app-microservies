@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: "api-gateway"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:7080/realms/master/protocol/openid-connect/certs"
+  config:
+    import: "optional:configserver:http://localhost:8082/"
+

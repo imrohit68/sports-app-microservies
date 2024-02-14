@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: "event"
+  profiles:
+    active: "dev"
+  config:
+    import: "optional:configserver:http://localhost:8082/"
+logging:
+  level:
+    com:
+      sprotsapppoc:
+        event: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
